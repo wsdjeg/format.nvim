@@ -1,7 +1,7 @@
 local M = {}
-local nt = require('spacevim.api.notify')
+local nt = require('notify')
 
-local log = require('spacevim.logger').derive('format')
+local log = require('format.log')
 
 function M.msg(msg)
   nt.notify(msg)

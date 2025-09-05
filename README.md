@@ -7,6 +7,7 @@
 * [Install](#install)
 * [Configuration](#configuration)
 * [Usage](#usage)
+* [Debug](#debug)
 * [Self-Promotion](#self-promotion)
 * [Feedback](#feedback)
 
@@ -21,6 +22,10 @@ require('plug').add({
   {
     'wsdjeg/format.nvim',
     cmds = { 'Format' },
+    depends = {
+      { 'wsdjeg/job.nvim' },
+      { 'wsdjeg/notify.nvim' },
+    },
   },
 })
 ```
@@ -73,6 +78,29 @@ require('plug').add({
     end,
     cmds = { 'Format' },
     depends = { { 'Shougo/context_filetype.vim' } },
+  },
+})
+```
+
+## Debug
+
+Debug with logger.nvim:
+
+```lua
+require('plug').add({
+  {
+    'wsdjeg/format.nvim',
+    depends = {
+      {
+        'wsdjeg/job.nvim',
+      },
+      {
+        'wsdjeg/notify.nvim',
+      },
+      {
+        'wsdjeg/logger.nvim',
+      },
+    },
   },
 })
 ```

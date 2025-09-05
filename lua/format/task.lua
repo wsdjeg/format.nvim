@@ -2,7 +2,7 @@ local M = {}
 
 local jobid = -1
 
-local job = require('spacevim.api.job')
+local job = require('job')
 local util = require('format.util')
 
 local stdout = {}
