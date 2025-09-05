@@ -86,8 +86,7 @@ Like this plugin? Star the repository on
 GitHub.
 
 Love this plugin? Follow [me](https://wsdjeg.net/) on
-[GitHub](https://github.com/wsdjeg) and
-[Twitter](http://twitter.com/wsdtty).
+[GitHub](https://github.com/wsdjeg).
 
 ## Feedback
 
