@@ -2,9 +2,6 @@
 
 > _format.nvim_ is an asynchronous code formatting plugin for neovim.
 
-[![](https://spacevim.org/img/build-with-SpaceVim.svg)](https://spacevim.org)
-[![GPLv3 License](https://img.spacevim.org/license-GPLv3-blue.svg)](LICENSE)
-
 <!-- vim-markdown-toc GFM -->
 
 * [Install](#install)
