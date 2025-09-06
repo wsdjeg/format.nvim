@@ -6,7 +6,7 @@ end
 
 function M.prettier(opt)
   return {
-    exe = vim.fn.exepath('prettier'),
+    exe = 'prettier',
     name = 'prettier',
     args = {'--stdin-filepath', opt.filepath},
     stdin = true
