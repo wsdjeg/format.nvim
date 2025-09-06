@@ -1,6 +1,6 @@
 # format.nvim
 
-> _format.nvim_ is an asynchronous code formatting plugin for neovim.
+Asynchronous code formatting plugin for neovim.
 
 <!-- vim-markdown-toc GFM -->
 
@@ -46,9 +46,13 @@ require('format').setup({
 
 ## Usage
 
-- `:Format`: format current buffer
+1. format current buffer or selected text.
 
-format code block in markdown:
+```
+:Format
+```
+
+2. format code block in markdown file.
 
 ```lua
 require('plug').add({
@@ -66,7 +70,6 @@ require('plug').add({
       })
     end,
     config_before = function()
-      vim.keymap.set('n', '<leader>bf', '<cmd>Format<cr>', { silent = true })
       vim.keymap.set('n', '<leader>lf', function()
         local cf = vim.call('context_filetype#get')
         if vim.o.filetype == 'markdown' and cf.filetype ~= 'markdown' then
@@ -74,7 +77,7 @@ require('plug').add({
           local line2 = cf['range'][2][1]
           vim.cmd(string.format('%s,%sFormat! %s', line1, line2, cf.filetype))
         end
-      end, { silent = true })
+      end, { silent = true, desc = 'format code block' })
     end,
     cmds = { 'Format' },
     depends = { { 'Shougo/context_filetype.vim' } },
@@ -84,7 +87,7 @@ require('plug').add({
 
 ## Debug
 
-Debug with logger.nvim:
+If you want to read the runtime log of format.nvim, you need to install [logger.nvim](http://github.com/wsdjeg/logger.nvim).
 
 ```lua
 require('plug').add({
@@ -103,6 +106,15 @@ require('plug').add({
     },
   },
 })
+```
+
+```
+[ 15:02:25:277 ] [ Info  ] [ format.nvim ] using custom formatter:stylua
+[ 15:02:25:277 ] [ Info  ] [ format.nvim ] running formatter: stylua
+[ 15:02:25:331 ] [ Info  ] [ format.nvim ] formatter: stylua exit code:0 single:0
+[ 15:03:59:481 ] [ Info  ] [ format.nvim ] using default formatter:prettier
+[ 15:03:59:482 ] [ Info  ] [ format.nvim ] running formatter: D:\Scoop\apps\nodejs\current\bin\prettier.CMD
+[ 15:04:00:340 ] [ Info  ] [ format.nvim ] formatter: prettier exit code:0 single:0
 ```
 
 ## Self-Promotion
