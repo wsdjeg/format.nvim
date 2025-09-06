@@ -17,7 +17,7 @@ function M.format(bang, user_input, start_line, end_line)
   local ok, formatter
 
   local filetype = vim.o.filetype
-  local argvs = vim.split(user_input, '%s+')
+  local argvs = vim.split(user_input, '%s+', { trimempty = true })
   if bang and #argvs > 0 then
     filetype = argvs[1]
   end
