@@ -7,9 +7,11 @@ Asynchronous code formatting plugin for neovim.
 * [Install](#install)
 * [Configuration](#configuration)
 * [Usage](#usage)
+* [Custom Formatter](#custom-formatter)
 * [Debug](#debug)
 * [Self-Promotion](#self-promotion)
 * [Feedback](#feedback)
+* [Credits](#credits)
 
 <!-- vim-markdown-toc -->
 
@@ -85,6 +87,14 @@ require('plug').add({
 })
 ```
 
+## Custom Formatter
+
+| name    | description                                        | optional/required |
+| ------- | -------------------------------------------------- | ----------------- |
+| `exe`   | `string`, formatter executable or path             | required          |
+| `args`  | `table<string>`, list of arguments                 | optional          |
+| `stdin` | `boolean`, send data to the stdin of the formatter | optional          |
+
 ## Debug
 
 If you want to read the runtime log of format.nvim, you need to install [logger.nvim](http://github.com/wsdjeg/logger.nvim).
@@ -128,3 +138,7 @@ Love this plugin? Follow [me](https://wsdjeg.net/) on
 ## Feedback
 
 If you encounter any bugs or have suggestions, please file an issue in the [issue tracker](https://github.com/wsdjeg/format.nvim/issues)
+
+## Credits
+
+- [neoformat](https://github.com/sbdchd/neoformat)
