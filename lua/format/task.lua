@@ -72,6 +72,7 @@ function M.run(task)
   stdout = {}
   stderr = {}
   current_task = task
+  util.info('cmd: ' .. vim.inspect(cmd))
   jobid = job.start(cmd, {
     on_stdout = on_stdout,
     on_stderr = on_stderr,
