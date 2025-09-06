@@ -1,6 +1,7 @@
 local M = {}
 
 local jobid = -1
+local timeoutid = -1
 
 local job = require('job')
 local util = require('format.util')
@@ -52,8 +53,16 @@ local function on_exit(id, code, single)
   else
     util.msg('formatter ' .. current_task.formatter.exe .. ' failed to run')
   end
+  if timeoutid >= 0 then
+    vim.fn.timer_stop(timeoutid)
+    timeoutid = -1
+  end
 
   jobid = -1
+end
+
+local function task_timeout(t)
+    job.stop(jobid)
 end
 
 ---@param task FormatTask
@@ -87,5 +96,6 @@ function M.run(task)
     job.send(jobid, task.stdin)
     job.send(jobid, nil)
   end
+  timeoutid = vim.fn.timer_start(task.timeout, task_timeout, { ['repeat'] = 1 })
 end
 return M

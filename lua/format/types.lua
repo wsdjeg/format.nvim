@@ -10,3 +10,4 @@
 --- @field start_line number
 --- @field end_line number
 --- @field formatter FormatSpec
+--- @field timeout number

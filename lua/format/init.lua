@@ -3,6 +3,8 @@ local M = {}
 local util = require('format.util')
 local task = require('format.task')
 
+local timeout = 5000
+
 local custom_formatters = {}
 
 ---@param bang boolean
@@ -87,6 +89,7 @@ function M.format(bang, user_input, start_line, end_line)
     start_line = start_line - 1,
     end_line = end_line,
     formatter = formatter,
+    timeout = timeout,
   })
 end
 
