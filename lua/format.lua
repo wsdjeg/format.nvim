@@ -5,6 +5,10 @@ local task = require('format.task')
 
 local custom_formatters = {}
 
+---@param bang boolean
+---@param user_input string
+---@param start_line number
+---@param end_line number
 function M.format(bang, user_input, start_line, end_line)
   if not vim.o.modifiable then
     return util.msg('buffer is not modifiable!')

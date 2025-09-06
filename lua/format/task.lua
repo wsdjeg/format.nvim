@@ -56,6 +56,7 @@ local function on_exit(id, code, single)
   jobid = -1
 end
 
+---@param task FormatTask
 function M.run(task)
   if jobid > 0 then
     util.msg('previous formatting command has not ended')
