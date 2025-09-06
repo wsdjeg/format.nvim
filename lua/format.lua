@@ -20,28 +20,37 @@ function M.format(bang, user_input, start_line, end_line)
   local argvs = vim.split(user_input, '%s+')
   if bang and #argvs > 0 then
     filetype = argvs[1]
-  elseif not bang and #argvs > 0 then
-    ok = pcall(function()
-      local default = require('format.ft.' .. filetype)
-      formatter = default[argvs[1]]({
-        filepath = vim.fn.expand('%:p'),
-        start_line = start_line,
-        end_line = end_line,
-      })
-      if vim.fn.executable(formatter.exe) == 1 then
-        util.info('using specific formatter:' .. argvs[1])
-      else
-          return util.msg(argvs[1] ..' is not executable!')
-      end
-    end)
-    if not ok then
-      return util.msg('formatter ' .. argvs[1] .. ' is not defined.')
-    end
   end
 
   if filetype == '' then
     return util.msg('format: skip empty filetype')
   end
+
+  if (not bang and #argvs > 0) or (#argvs > 1) then
+    local formatter_name
+    ok = pcall(function()
+      local default = require('format.ft.' .. filetype)
+      if bang then
+        formatter_name = argvs[2]
+      else
+        formatter_name = argvs[1]
+      end
+      formatter = default[formatter_name]({
+        filepath = vim.fn.expand('%:p'),
+        start_line = start_line,
+        end_line = end_line,
+      })
+      if vim.fn.executable(formatter.exe) == 1 then
+        util.info('using specific formatter:' .. formatter_name)
+      else
+        return util.msg(formatter.exe .. ' is not executable!')
+      end
+    end)
+    if not ok then
+      return util.msg('formatter ' .. formatter_name .. ' is not defined.')
+    end
+  end
+
   if not formatter and custom_formatters[filetype] then
     formatter = custom_formatters[filetype]
     if formatter.exe and type(formatter.exe) == 'string' then
@@ -61,10 +70,13 @@ function M.format(bang, user_input, start_line, end_line)
         if vim.fn.executable(formatter.exe) == 1 then
           util.info('using default formatter:' .. formatname)
           break
+        else
+          util.info(formatter.exe .. ' is not executable.')
+          formatter = nil
         end
       end
     end)
-    if not ok then
+    if not formatter then
       return util.msg('no formatter for ' .. filetype)
     end
   end
