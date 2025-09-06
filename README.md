@@ -87,6 +87,20 @@ require('plug').add({
 })
 ```
 
+3. format code when save file.
+
+```lua
+local augroup = vim.api.nvim_create_augroup('format_on_save', { clear = true })
+
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  group = augroup,
+  callback = function(_)
+    vim.cmd('Format')
+  end,
+})
+```
+
 ## Custom Formatter
 
 | name    | description                                        | optional/required |
