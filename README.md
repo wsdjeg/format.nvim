@@ -4,14 +4,14 @@ Asynchronous code formatting plugin for neovim.
 
 <!-- vim-markdown-toc GFM -->
 
-* [Install](#install)
-* [Configuration](#configuration)
-* [Usage](#usage)
-* [Custom Formatter](#custom-formatter)
-* [Debug](#debug)
-* [Self-Promotion](#self-promotion)
-* [Feedback](#feedback)
-* [Credits](#credits)
+- [Install](#install)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Custom Formatter](#custom-formatter)
+- [Debug](#debug)
+- [Self-Promotion](#self-promotion)
+- [Feedback](#feedback)
+- [Credits](#credits)
 
 <!-- vim-markdown-toc -->
 
