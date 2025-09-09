@@ -1,6 +1,9 @@
 # format.nvim
 
-Asynchronous code formatting plugin for neovim.
+**format.nvim** is an asynchronous code formatting plugin for neovim.
+By using `nvim_buf_get_lines` api, format.nvim is able to format the buffer which has not been saved.
+On a formatter success It will update current buffer via `nvim_buf_set_lines`, and marks, jumps, etc.
+are all maintained after formatting.
 
 <!-- vim-markdown-toc GFM -->
 
@@ -9,6 +12,7 @@ Asynchronous code formatting plugin for neovim.
 - [Usage](#usage)
 - [Custom Formatter](#custom-formatter)
 - [Debug](#debug)
+- [Default formatters](#default-formatters)
 - [Self-Promotion](#self-promotion)
 - [Feedback](#feedback)
 - [Credits](#credits)
@@ -140,6 +144,13 @@ require('plug').add({
 [ 15:03:59:482 ] [ Info  ] [ format.nvim ] running formatter: D:\Scoop\apps\nodejs\current\bin\prettier.CMD
 [ 15:04:00:340 ] [ Info  ] [ format.nvim ] formatter: prettier exit code:0 single:0
 ```
+
+## Default formatters
+
+- c: uncrustify, clangformat, astyle
+- rust: rustfmt
+- markdown: prettier
+- json: prettier
 
 ## Self-Promotion
 
