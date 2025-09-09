@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/wsdjeg/format.nvim/compare/v1.0.0...v1.1.0) (2025-09-09)
+
+
+### Features
+
+* **core:** specific filetype and formatter ([efe04b2](https://github.com/wsdjeg/format.nvim/commit/efe04b223b524ee6fac8862a625bea4fefd2cb6a))
+* **task:** support timeout ([7618555](https://github.com/wsdjeg/format.nvim/commit/76185558835645d9d9a2f6ad3741065d84dd1777))
+* **types:** add format types ([3deb5e6](https://github.com/wsdjeg/format.nvim/commit/3deb5e657371f425bff9232aa3bebff2d7422af9))
+
+
+### Bug Fixes
+
+* **formatter:** remove exepath ([aa923b8](https://github.com/wsdjeg/format.nvim/commit/aa923b8459cddd6b808b38036f7bcc78b580cf56))
+
 ## 1.0.0 (2025-03-13)
 
 
