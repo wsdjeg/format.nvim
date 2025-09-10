@@ -7,6 +7,7 @@ are all maintained after formatting.
 
 <!-- vim-markdown-toc GFM -->
 
+- [Features](#features)
 - [Install](#install)
 - [Configuration](#configuration)
 - [Usage](#usage)
@@ -20,6 +21,14 @@ are all maintained after formatting.
 - [Credits](#credits)
 
 <!-- vim-markdown-toc -->
+
+## Features
+
+- written in lua
+- lock buffer while formatting
+- run formatter asynchronously
+- range formatting
+- embedded code block formatting
 
 ## Install
 
