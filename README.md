@@ -102,7 +102,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   pattern = { '*' },
   group = augroup,
   callback = function(_)
-    vim.cmd('Format')
+    vim.cmd('FormatWrite')
   end,
 })
 ```
