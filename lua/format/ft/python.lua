@@ -4,7 +4,7 @@ function M.enabled()
   return { 'yapf' }
 end
 
-function M.prettier(opt)
+function M.yapf(opt)
   return {
     exe = 'yapf',
     args = {},

@@ -153,6 +153,7 @@ require('plug').add({
 - markdown: prettier
 - json: prettier
 - python: yapf
+- go: gofmt
 
 ## Self-Promotion
 
