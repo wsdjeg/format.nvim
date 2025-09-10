@@ -10,6 +10,8 @@ local stdout = {}
 local stderr = {}
 local current_task
 
+local hooks
+
 local function on_stdout(id, data)
   for _, v in ipairs(data) do
     table.insert(stdout, v)
@@ -50,6 +52,9 @@ local function on_exit(id, code, single)
         formatted_context
       )
     end
+    if current_task.hooks and current_task.hooks.post then
+        current_task.hooks.post(current_task.bufnr)
+    end
   else
     util.msg('formatter ' .. current_task.formatter.exe .. ' failed to run')
   end
@@ -62,7 +67,7 @@ local function on_exit(id, code, single)
 end
 
 local function task_timeout(t)
-    job.stop(jobid)
+  job.stop(jobid)
 end
 
 ---@param task FormatTask
@@ -70,6 +75,10 @@ function M.run(task)
   if jobid > 0 then
     util.msg('previous formatting command has not ended')
     return
+  end
+
+  if task.hooks and task.hooks.pre then
+    task.hooks.pre(task.bufnr)
   end
 
   util.info('running formatter: ' .. task.formatter.exe)

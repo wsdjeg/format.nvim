@@ -11,3 +11,4 @@
 --- @field end_line number
 --- @field formatter FormatSpec
 --- @field timeout number
+--- @field hooks? table

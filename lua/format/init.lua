@@ -11,7 +11,7 @@ local custom_formatters = {}
 ---@param user_input string
 ---@param start_line number
 ---@param end_line number
-function M.format(bang, user_input, start_line, end_line)
+function M.format(bang, user_input, start_line, end_line, opts)
   if not vim.o.modifiable then
     return util.msg('buffer is not modifiable!')
   end
@@ -83,6 +83,12 @@ function M.format(bang, user_input, start_line, end_line)
     end
   end
 
+  local hooks
+
+  if opts and opts.hooks then
+    hooks = opts.hooks
+  end
+
   task.run({
     bufnr = vim.fn.bufnr(),
     stdin = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false),
@@ -90,6 +96,7 @@ function M.format(bang, user_input, start_line, end_line)
     end_line = end_line,
     formatter = formatter,
     timeout = timeout,
+    hooks = hooks,
   })
 end
 

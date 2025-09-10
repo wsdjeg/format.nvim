@@ -10,6 +10,7 @@ are all maintained after formatting.
 - [Install](#install)
 - [Configuration](#configuration)
 - [Usage](#usage)
+    - [Before/after format hooks](#beforeafter-format-hooks)
 - [Custom Formatter](#custom-formatter)
 - [Debug](#debug)
 - [Default formatters](#default-formatters)
@@ -103,6 +104,19 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   callback = function(_)
     vim.cmd('Format')
   end,
+})
+```
+
+### Before/after format hooks
+
+This feature is inspired by formatter.nvim, instead of using User autocmd, format.nvim uses functions.
+
+```lua
+require('format').format(bang, user_input, start_line, end_line, {
+  hooks = {
+    pre = function(buf) end,
+    post = function(buf) end,
+  },
 })
 ```
 
