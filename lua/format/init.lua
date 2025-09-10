@@ -101,6 +101,7 @@ function M.setup(opt)
       end
     end
   end
+  timeout = opt.timeout or timeout
 end
 
 return M

@@ -47,6 +47,7 @@ require('format').setup({
       stdin = true,
     },
   },
+  timeout = 5000,
 })
 ```
 
