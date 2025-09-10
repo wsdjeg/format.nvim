@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://github.com/wsdjeg/format.nvim/compare/v1.1.0...v1.2.0) (2025-09-10)
+
+
+### Features
+
+* **cmd:** add FormatWrite command ([8f8e20a](https://github.com/wsdjeg/format.nvim/commit/8f8e20af66801a237250ed3387ef162a025df7db))
+* **core:** support format hooks ([e475bc5](https://github.com/wsdjeg/format.nvim/commit/e475bc58045e23fea3888b4e307373604c45eb81))
+* **core:** support locking buffer ([01d646b](https://github.com/wsdjeg/format.nvim/commit/01d646b737d2fdb44aafea2128446a2049d56557))
+* **core:** support timeout option ([dcb7267](https://github.com/wsdjeg/format.nvim/commit/dcb72674a86bb108a1ab1d4f812bd1496058311d))
+* **formatter:** add gofmt for golang ([61fe2be](https://github.com/wsdjeg/format.nvim/commit/61fe2be46f797746d975a6316db2b72c943ce739))
+* **formatter:** add yapf for python ([9fbd484](https://github.com/wsdjeg/format.nvim/commit/9fbd484fb97e60bda0db4abddadedc8279b48a30))
+
+
+### Bug Fixes
+
+* **hooks:** run hooks.post only when changed ([ce58787](https://github.com/wsdjeg/format.nvim/commit/ce58787e331dc135f642050d2515af65a06eed1c))
+
 ## [1.1.0](https://github.com/wsdjeg/format.nvim/compare/v1.0.0...v1.1.0) (2025-09-09)
 
 
