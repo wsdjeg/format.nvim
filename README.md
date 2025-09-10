@@ -152,6 +152,7 @@ require('plug').add({
 - rust: rustfmt
 - markdown: prettier
 - json: prettier
+- python: yapf
 
 ## Self-Promotion
 
