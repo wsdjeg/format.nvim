@@ -169,4 +169,8 @@ If you encounter any bugs or have suggestions, please file an issue in the [issu
 
 ## Credits
 
-- [neoformat](https://github.com/sbdchd/neoformat)
+- [sbdchd/neoformat](https://github.com/sbdchd/neoformat)
+- [google/vim-codefmt](https://github.com/google/vim-codefmt)
+- [vim-autoformat](https://github.com/vim-autoformat/vim-autoformat)
+- [mhartington/formatter.nvim](https://github.com/mhartington/formatter.nvim)
+- [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
