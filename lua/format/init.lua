@@ -16,6 +16,8 @@ function M.format(bang, user_input, start_line, end_line, opts)
     return util.msg('buffer is not modifiable!')
   end
 
+  opts = opts or {}
+
   local ok, formatter
 
   local filetype = vim.o.filetype
@@ -83,12 +85,6 @@ function M.format(bang, user_input, start_line, end_line, opts)
     end
   end
 
-  local hooks
-
-  if opts and opts.hooks then
-    hooks = opts.hooks
-  end
-
   task.run({
     bufnr = vim.fn.bufnr(),
     stdin = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false),
@@ -96,7 +92,8 @@ function M.format(bang, user_input, start_line, end_line, opts)
     end_line = end_line,
     formatter = formatter,
     timeout = timeout,
-    hooks = hooks,
+    hooks = opts.hooks,
+    lock_buf = opts.lock_buf,
   })
 end
 

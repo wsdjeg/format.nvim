@@ -44,6 +44,9 @@ local function on_exit(id, code, single)
       util.msg('no necessary changes')
     else
       util.msg((current_task.formatter.name or current_task.formatter.exe) .. ' formatted buffer')
+      if current_task.lock_buf then
+        vim.api.nvim_set_option_value('modifiable', true, { buf = current_task.bufnr })
+      end
       vim.api.nvim_buf_set_lines(
         current_task.bufnr,
         current_task.start_line,
@@ -61,6 +64,10 @@ local function on_exit(id, code, single)
   if timeoutid >= 0 then
     vim.fn.timer_stop(timeoutid)
     timeoutid = -1
+  end
+
+  if current_task.lock_buf then
+    vim.api.nvim_set_option_value('modifiable', true, { buf = current_task.bufnr })
   end
 
   jobid = -1
@@ -82,6 +89,9 @@ function M.run(task)
   end
 
   util.info('running formatter: ' .. task.formatter.exe)
+  if task.lock_buf then
+    vim.api.nvim_set_option_value('modifiable', false, { buf = task.bufnr })
+  end
 
   local cmd = { task.formatter.exe }
   for _, v in ipairs(task.formatter.args) do

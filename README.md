@@ -11,6 +11,7 @@ are all maintained after formatting.
 - [Configuration](#configuration)
 - [Usage](#usage)
     - [Before/after format hooks](#beforeafter-format-hooks)
+    - [Lock buffer when formatting](#lock-buffer-when-formatting)
 - [Custom Formatter](#custom-formatter)
 - [Debug](#debug)
 - [Default formatters](#default-formatters)
@@ -119,6 +120,10 @@ require('format').format(bang, user_input, start_line, end_line, {
   },
 })
 ```
+
+### Lock buffer when formatting
+
+Using `FormatLock` or `FormatWriteLock` commands instead of `Format` or `FormatWrite`, format.nvim will lock the buffer when formatting.
 
 ## Custom Formatter
 
