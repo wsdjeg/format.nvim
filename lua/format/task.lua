@@ -51,9 +51,9 @@ local function on_exit(id, code, single)
         false,
         formatted_context
       )
-    end
-    if current_task.hooks and current_task.hooks.post then
+      if current_task.hooks and current_task.hooks.post then
         current_task.hooks.post(current_task.bufnr)
+      end
     end
   else
     util.msg('formatter ' .. current_task.formatter.exe .. ' failed to run')
