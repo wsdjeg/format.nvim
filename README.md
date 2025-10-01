@@ -176,14 +176,18 @@ require('plug').add({
 
 ## Default formatters
 
-| language | formatters                      |
-| -------- | ------------------------------- |
-| c        | uncrustify, clangformat, astyle |
-| rust     | rustfmt                         |
-| markdown | prettier                        |
-| json     | prettier                        |
-| python   | yapf                            |
-| go       | gofmt                           |
+| language   | formatters                      |
+| ---------- | ------------------------------- |
+| c          | uncrustify, clangformat, astyle |
+| rust       | rustfmt                         |
+| markdown   | prettier                        |
+| json       | prettier                        |
+| python     | yapf                            |
+| go         | gofmt                           |
+| asm        | asmfmt                          |
+| elixir     | mix-format                      |
+| java       | astyle                          |
+| javascript | js-beautify                     |
 
 ## Self-Promotion
 
