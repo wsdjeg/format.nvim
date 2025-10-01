@@ -85,7 +85,7 @@ function M.format(bang, user_input, start_line, end_line, opts)
     end
   end
 
-  local indent = 0
+  local indent = ''
 
   if start_line > 1 then
     indent = vim.fn.matchstr(vim.fn.getline(start_line - 1), '^\\s*')
