@@ -40,6 +40,13 @@ local function on_exit(id, code, single)
     else
       formatted_context = stdout
     end
+    if #current_task.indent > 0 then
+      formatted_context = (function()
+        return vim.tbl_map(function(t)
+          return current_task.indent .. t
+        end, formatted_context)
+      end)()
+    end
     if table.concat(formatted_context, '\n') == table.concat(current_task.stdin, '\n') then
       util.msg('no necessary changes')
     else

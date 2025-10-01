@@ -85,6 +85,12 @@ function M.format(bang, user_input, start_line, end_line, opts)
     end
   end
 
+  local indent = 0
+
+  if start_line > 1 then
+    indent = vim.fn.matchstr(vim.fn.getline(start_line - 1), '^\\s*')
+  end
+
   task.run({
     bufnr = vim.fn.bufnr(),
     stdin = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false),
@@ -94,6 +100,7 @@ function M.format(bang, user_input, start_line, end_line, opts)
     timeout = timeout,
     hooks = opts.hooks,
     lock_buf = opts.lock_buf,
+    indent = indent,
   })
 end
 
