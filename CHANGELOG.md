@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.3.0](https://github.com/wsdjeg/format.nvim/compare/v1.2.0...v1.3.0) (2025-10-20)
+
+
+### Features
+
+* add asmfmt for asm ([e3fcf10](https://github.com/wsdjeg/format.nvim/commit/e3fcf103a0b167f365c12ae22f14470d241ce69a))
+* add astyle for java ([6f7ee57](https://github.com/wsdjeg/format.nvim/commit/6f7ee5729385177c6b87a5130e8e78c836ed91f0))
+* add js-beautify formatter for javascript ([f6b65b7](https://github.com/wsdjeg/format.nvim/commit/f6b65b7ccf3b460bf3c7edbbd222177f251d96a6))
+* add mixformat for elixir ([f5b4963](https://github.com/wsdjeg/format.nvim/commit/f5b49634754af977a755365000f03eba98980b09))
+* add stylua formatter ([d72462a](https://github.com/wsdjeg/format.nvim/commit/d72462a96d96f5693b4313f77625a4c575fe4b68))
+* support default indent ([ad2a3c1](https://github.com/wsdjeg/format.nvim/commit/ad2a3c10bc1b05f59c16b89f7dc69467091f778f))
+
+
+### Bug Fixes
+
+* fix default type ([3e69a0a](https://github.com/wsdjeg/format.nvim/commit/3e69a0a0dd662574abb89263c2816695382c4b1c))
+
 ## [1.2.0](https://github.com/wsdjeg/format.nvim/compare/v1.1.0...v1.2.0) (2025-09-10)
 
 
