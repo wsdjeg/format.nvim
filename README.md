@@ -1,5 +1,10 @@
 # format.nvim
 
+[![GitHub License](https://img.shields.io/github/license/wsdjeg/format.nvim)](LICENSE)
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/wsdjeg/format.nvim)](https://github.com/wsdjeg/format.nvim/issues)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/wsdjeg/format.nvim)](https://github.com/wsdjeg/format.nvim/commits/master/)
+[![GitHub Release](https://img.shields.io/github/v/release/wsdjeg/format.nvim)](https://github.com/wsdjeg/format.nvim/releases)
+
 **format.nvim** is an asynchronous code formatting plugin for neovim.
 By using `nvim_buf_get_lines` api, format.nvim is able to format the buffer which has not been saved.
 On a formatter success It will update current buffer via `nvim_buf_set_lines`, and marks, jumps, etc.
