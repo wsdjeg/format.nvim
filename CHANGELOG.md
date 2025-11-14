@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/wsdjeg/format.nvim/compare/v1.3.0...v1.4.0) (2025-11-14)
+
+
+### Features
+
+* add toml formatter ([d131ffb](https://github.com/wsdjeg/format.nvim/commit/d131ffb5cb282b48981cfdf7aa354c4802b5b607))
+
 ## [1.3.0](https://github.com/wsdjeg/format.nvim/compare/v1.2.0...v1.3.0) (2025-10-20)
 
 
