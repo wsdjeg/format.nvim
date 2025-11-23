@@ -37,7 +37,7 @@ are all maintained after formatting.
 
 ## Install
 
-With [nvim-plug](https://github.com/wsdjeg/nvim-plug)
+Using [nvim-plug](https://github.com/wsdjeg/nvim-plug)
 
 ```lua
 require('plug').add({
@@ -50,6 +50,12 @@ require('plug').add({
     },
   },
 })
+```
+
+Using [luarocks](https://luarocks.org/)
+
+```
+luarocks install format.nvim
 ```
 
 ## Configuration
