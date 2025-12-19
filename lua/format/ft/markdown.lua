@@ -8,7 +8,7 @@ function M.prettier(opt)
   return {
     exe = 'prettier',
     name = 'prettier',
-    args = {'--stdin-filepath', opt.filepath},
+    args = {'--parser', 'markdown'},
     stdin = true
   }
 end
