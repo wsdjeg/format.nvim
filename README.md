@@ -1,9 +1,11 @@
 # format.nvim
 
+[![Run Tests](https://github.com/wsdjeg/format.nvim/actions/workflows/test.yml/badge.svg)](https://github.com/wsdjeg/format.nvim/actions/workflows/test.yml)
 [![GitHub License](https://img.shields.io/github/license/wsdjeg/format.nvim)](LICENSE)
 [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/wsdjeg/format.nvim)](https://github.com/wsdjeg/format.nvim/issues)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/wsdjeg/format.nvim)](https://github.com/wsdjeg/format.nvim/commits/master/)
 [![GitHub Release](https://img.shields.io/github/v/release/wsdjeg/format.nvim)](https://github.com/wsdjeg/format.nvim/releases)
+[![luarocks](https://img.shields.io/luarocks/v/wsdjeg/format.nvim)](https://luarocks.org/modules/wsdjeg/format.nvim)
 
 **format.nvim** is an asynchronous code formatting plugin for neovim.
 By using `nvim_buf_get_lines` api, format.nvim is able to format the buffer which has not been saved.
@@ -219,3 +221,4 @@ If you encounter any bugs or have suggestions, please file an issue in the [issu
 - [vim-autoformat](https://github.com/vim-autoformat/vim-autoformat)
 - [mhartington/formatter.nvim](https://github.com/mhartington/formatter.nvim)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
+
