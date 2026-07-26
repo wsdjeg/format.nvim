@@ -16,13 +16,21 @@ are all maintained after formatting.
 
 - [Features](#features)
 - [Install](#install)
+    - [nvim-plug](#nvim-plug)
+    - [lazy.nvim](#lazynvim)
+    - [LuaRocks](#luarocks)
 - [Configuration](#configuration)
 - [Usage](#usage)
+    - [Commands](#commands)
+    - [Format on save](#format-on-save)
+    - [Range formatting](#range-formatting)
+    - [Embedded code block formatting](#embedded-code-block-formatting)
     - [Before/after format hooks](#beforeafter-format-hooks)
     - [Lock buffer when formatting](#lock-buffer-when-formatting)
 - [Custom Formatter](#custom-formatter)
+- [Default Formatters](#default-formatters)
+- [How It Works](#how-it-works)
 - [Debug](#debug)
-- [Default formatters](#default-formatters)
 - [Self-Promotion](#self-promotion)
 - [Feedback](#feedback)
 - [Credits](#credits)
@@ -31,15 +39,19 @@ are all maintained after formatting.
 
 ## Features
 
-- written in lua
-- lock buffer while formatting
-- run formatter asynchronously
-- range formatting
-- embedded code block formatting
+- **Async** — formatters run in background via [job.nvim](https://github.com/wsdjeg/job.nvim), no UI blocking
+- **No temp files** — buffer content is piped via stdin, unsaved buffers work seamlessly
+- **Auto-fallback** — each filetype has an ordered formatter list; the first available executable wins
+- **Range formatting** — format a visual selection or arbitrary line range
+- **Buffer lock** — optionally lock the buffer during formatting to prevent edit conflicts
+- **Hooks** — run custom `pre`/`post` functions before and after formatting
+- **Custom formatters** — register your own formatters per filetype via `setup()`
+- **Marks preserved** — marks, jumps, and folds are maintained after formatting
+- **Lightweight** — minimal dependencies, pure Lua, no LSP required
 
 ## Install
 
-Using [nvim-plug](https://github.com/wsdjeg/nvim-plug)
+### nvim-plug
 
 ```lua
 require('plug').add({
@@ -54,16 +66,38 @@ require('plug').add({
 })
 ```
 
-Using [luarocks](https://luarocks.org/)
+### lazy.nvim
 
+```lua
+{
+  'wsdjeg/format.nvim',
+  cmd = { 'Format', 'FormatWrite', 'FormatLock', 'FormatWriteLock' },
+  dependencies = {
+    'wsdjeg/job.nvim',
+    'wsdjeg/notify.nvim',
+  },
+  config = function()
+    require('format').setup({})
+  end,
+}
 ```
+
+### LuaRocks
+
+```sh
 luarocks install format.nvim
 ```
+
+> **Dependencies:**
+> - [job.nvim](https://github.com/wsdjeg/job.nvim) — async job execution (required)
+> - [notify.nvim](https://github.com/wsdjeg/notify.nvim) — notification display (required)
+> - [logger.nvim](https://github.com/wsdjeg/logger.nvim) — debug logging (optional)
 
 ## Configuration
 
 ```lua
 require('format').setup({
+  -- register custom formatters per filetype
   custom_formatters = {
     lua = {
       exe = 'stylua',
@@ -71,19 +105,57 @@ require('format').setup({
       stdin = true,
     },
   },
+  -- timeout in milliseconds (default: 5000)
   timeout = 5000,
 })
 ```
 
 ## Usage
 
-1. format current buffer or selected text.
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `:Format` | Format current buffer or selected range |
+| `:FormatWrite` | Format and write the buffer to disk |
+| `:FormatLock` | Format with buffer locked during formatting |
+| `:FormatWriteLock` | Format + write with buffer locked |
+
+Use `!` to force a specific filetype: `:Format! python`
+
+Use a formatter name to pick one explicitly: `:Format stylua`
+
+### Format on save
+
+```lua
+local augroup = vim.api.nvim_create_augroup('format_on_save', { clear = true })
+
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  group = augroup,
+  callback = function(_)
+    vim.cmd('FormatWrite')
+  end,
+})
+```
+
+### Range formatting
+
+In visual mode, select lines and run:
 
 ```
-:Format
+:'<,'>Format
 ```
 
-2. format code block in markdown file.
+Or specify line numbers directly:
+
+```
+:10,20Format
+```
+
+### Embedded code block formatting
+
+Format code blocks inside markdown files using [context_filetype.vim](https://github.com/Shougo/context_filetype.vim):
 
 ```lua
 require('plug').add({
@@ -116,20 +188,6 @@ require('plug').add({
 })
 ```
 
-3. format code when save file.
-
-```lua
-local augroup = vim.api.nvim_create_augroup('format_on_save', { clear = true })
-
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = { '*' },
-  group = augroup,
-  callback = function(_)
-    vim.cmd('FormatWrite')
-  end,
-})
-```
-
 ### Before/after format hooks
 
 This feature is inspired by formatter.nvim, instead of using User autocmd, format.nvim uses functions.
@@ -154,6 +212,49 @@ Using `FormatLock` or `FormatWriteLock` commands instead of `Format` or `FormatW
 | `exe`   | `string`, formatter executable or path             | required          |
 | `args`  | `table<string>`, list of arguments                 | optional          |
 | `stdin` | `boolean`, send data to the stdin of the formatter | optional          |
+
+Example — register a custom formatter for TypeScript:
+
+```lua
+require('format').setup({
+  custom_formatters = {
+    typescript = {
+      exe = 'prettier',
+      args = { '--stdin-filepath', vim.fn.expand('%:p') },
+      stdin = true,
+    },
+  },
+})
+```
+
+## Default Formatters
+
+| Language | Formatters | Notes |
+|----------|-----------|-------|
+| C | uncrustify, clang-format, astyle | auto-fallback to first available |
+| Lua | stylua | |
+| Python | yapf | |
+| Rust | rustfmt | |
+| Go | gofmt | |
+| JSON | prettier | |
+| Markdown | prettier | `--parser markdown` |
+| JavaScript | js-beautify | respects `shiftwidth()` |
+| Java | astyle | `--mode=java` |
+| Assembly | asmfmt | |
+| Elixir | mix format | `mix format -` |
+| TOML | taplo, topiary | auto-fallback to first available |
+
+## How It Works
+
+1. Reads buffer lines via `nvim_buf_get_lines` (no file save needed)
+2. Finds the first available formatter for the current filetype
+3. Pipes buffer content to the formatter via stdin (async, via job.nvim)
+4. Collects formatted output and replaces buffer lines via `nvim_buf_set_lines`
+5. Preserves marks, jumps, folds, and undo history
+
+```
+Buffer ──nvim_buf_get_lines──▶ stdin ──▶ formatter ──▶ stdout ──▶ nvim_buf_set_lines──▶ Buffer
+```
 
 ## Debug
 
@@ -186,21 +287,6 @@ require('plug').add({
 [ 15:03:59:482 ] [ Info  ] [ format.nvim ] running formatter: D:\Scoop\apps\nodejs\current\bin\prettier.CMD
 [ 15:04:00:340 ] [ Info  ] [ format.nvim ] formatter: prettier exit code:0 single:0
 ```
-
-## Default formatters
-
-| language   | formatters                      |
-| ---------- | ------------------------------- |
-| c          | uncrustify, clangformat, astyle |
-| rust       | rustfmt                         |
-| markdown   | prettier                        |
-| json       | prettier                        |
-| python     | yapf                            |
-| go         | gofmt                           |
-| asm        | asmfmt                          |
-| elixir     | mix-format                      |
-| java       | astyle                          |
-| javascript | js-beautify                     |
 
 ## Self-Promotion
 
