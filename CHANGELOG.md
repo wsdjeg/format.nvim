@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.1](https://github.com/wsdjeg/format.nvim/compare/v1.4.0...v1.4.1) (2026-07-26)
+
+
+### Bug Fixes
+
+* use `--parser` instead ([0357df0](https://github.com/wsdjeg/format.nvim/commit/0357df00332501128d73db018ef4c78ac14ba986))
+
+
+### Documentation
+
+* improve README with full features, commands table, and how-it-works section ([be922d3](https://github.com/wsdjeg/format.nvim/commit/be922d3cc6d7219c2a1d8475d48bc70e17deb570))
+
 ## [1.4.0](https://github.com/wsdjeg/format.nvim/compare/v1.3.0...v1.4.0) (2025-11-23)
 
 
